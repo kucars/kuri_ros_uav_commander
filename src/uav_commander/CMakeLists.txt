@@ -11,7 +11,11 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   nav_msgs
   std_msgs
+<<<<<<< HEAD
+  dynamic_reconfigure
+=======
   visualeyez_tracker
+>>>>>>> 4e7412f8dd18dea1d75db4990e47e595167bb17c
 )
 
 ## System dependencies are found with CMake's conventions
@@ -74,6 +78,9 @@ find_package(catkin REQUIRED COMPONENTS
 #   std_msgs
 # )
 
+generate_dynamic_reconfigure_options(config/PIDControl.cfg)
+
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -109,18 +116,23 @@ include_directories(include
 # )
 
 ## Declare a cpp executable
-add_executable(position_controller src/uav_commander.cpp)
+#add_executable(position_controller src/uav_commander.cpp)
+add_executable(position_controller src/PositionControl.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(position_controller uav_commander_generate_messages_cpp)
+#add_dependencies(position_controller uav_commander_generate_messages_cpp)
+add_dependencies(position_controller uav_commander_generate_messages_cpp ${PROJECT_NAME}_gencfg)
 
 ## Specify libraries to link a library or executable target against
+#target_link_libraries(position_controller
+#  ${catkin_LIBRARIES}
+#-lpq
+#)
 target_link_libraries(position_controller
   ${catkin_LIBRARIES}
 -lpq
 )
-
 #############
 ## Install ##
 #############
@@ -168,3 +180,5 @@ target_link_libraries(position_controller
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+
